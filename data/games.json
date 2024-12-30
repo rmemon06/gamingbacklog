@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Hollow Knight",
+        "genreID": 1,
+        "description": "Little bug with a big sword",
+        "image": "/images/hollowKnight.png",
+        "price": 10
+    },
+    {
+        "id": 2,
+        "name": "Subnautica",
+        "genreID": 2,
+        "description": "Underwater survival",
+        "image": "/images/subnautica.png",
+        "price": 20
+    },
+    {
+        "id": 3,
+        "name": "Sifu",
+        "genreID": 3,
+        "description": "Martial arts",
+        "image": "/images/sifu.png", 
+        "price": 20
+    }
+]
