@@ -3,6 +3,9 @@ const popUp = document.getElementById('popUp')
 const popUpTitle = document.getElementById('popUpTitle')
 const popUpDescription = document.getElementById('popUpDescription')
 const popUpImage = document.getElementById('popUpImage')
+const closePopUp = document.getElementById('popUpClose')
+const forward = document.getElementById('popUpForward')
+const backward = document.getElementById('popUpBackward')
 function getListOfGames(){
     fetch('/api/games')
     .then(res => res.json())
@@ -16,6 +19,7 @@ function getListOfGames(){
             h2.textContent = game.name
             img.addEventListener('click', () => {
                 topGames.style.filter = 'blur(5px)'
+                popUp.classList.remove('close')
                 popUp.classList.add('open')
                 popUpTitle.textContent = game.name
                 popUpDescription.textContent = game.description
@@ -28,5 +32,48 @@ function getListOfGames(){
     })
 
 }
+
+closePopUp.addEventListener('click',    () => {
+    topGames.style.filter = 'blur(0px)'
+    popUp.classList.add('close')
+    popUp.classList.remove('open')
+   
+});
+
+forward.addEventListener('click', () => {
+    const gameName = popUpTitle.textContent
+    fetch('/api/games')
+    .then(res => res.json())
+    .then(data => {
+        data.forEach((game) => {
+           if(game.name == gameName){
+               const index = data.indexOf(game)
+               const nextGame = data[index + 1]
+               popUpTitle.textContent = nextGame.name
+               popUpDescription.textContent = nextGame.description
+               popUpImage.src = nextGame.image
+           }
+        }  )
+        })
+    }
+    )
+
+    backward.addEventListener('click', () => {
+        const gameName = popUpTitle.textContent
+        fetch('/api/games')
+        .then(res => res.json())
+        .then(data => {
+            data.forEach((game) => {
+               if(game.name == gameName){
+                   const index = data.indexOf(game)
+                   const nextGame = data[index -1]
+                   popUpTitle.textContent = nextGame.name
+                   popUpDescription.textContent = nextGame.description
+                   popUpImage.src = nextGame.image
+               }
+            }  )
+            })
+        }
+        )
 
 getListOfGames()

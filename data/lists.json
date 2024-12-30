@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "name": "All"
+    },
+
+    {
+     "id": 2,
+     "name": "Toplay"    
+    },
+    
+    {
+        "id": 3,
+        "name": "Playing"    
+    },
+
+    {
+        "id": 4,
+        "name": "Favourites"    
+    },
+
+    {
+        "id": 5,
+        "name": "Wishlist"    
+    }
+
+    
+]

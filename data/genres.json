@@ -7,5 +7,35 @@
     {
      "id": 2,
      "name": "Survival"    
+    },
+    
+    {
+        "id": 3,
+        "name": "RPG"    
+    },
+
+    {
+        "id": 4,
+        "name": "Zombie"    
+    },
+
+    {
+        "id": 5,
+        "name": "Adventure"    
+    },
+
+    {
+        "id": 6,
+        "name": "Metroidvania"    
+    },
+
+    {
+        "id": 7,
+        "name": "Simulator"    
+    },
+    {
+        "id": 8,
+        "name": "Horror"
     }
+    
 ]
