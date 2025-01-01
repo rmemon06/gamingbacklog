@@ -11,27 +11,73 @@
             <img id="logo" src="images/logo.png" alt="Backlog logo" />
             <nav>
                 <a href="index.html">Home</a>
-                <a href="lists.html">Lists</a>
-                <a href="about.html">About</a>
+                <div class="dropdown">
+                    <button class="dropbtn">Lists</button>
+                    <div class="dropdown-content">
+                        <a href="games.html">All Games</a>
+                        <a href="topgames.html">Top Games</a>
+                        <a href="gamesPlaying.html">Games In Progress</a>
+                        <a href="gamesToPlay.html">Games To Play</a>
+                        <a href="wishlist.html">Wishlist</a>
+                    </div>
+                </div>
                 <a href="reviews.html">Reviews</a>
-
-        
             </nav>
         </div>
-    </header>
-
-    <div id="topGames">
         
+    </header>
+    <div id="top">
+      <h1>Rohans Backlog</h1>
     </div>
+    
+    <section id="quickStats">
+      <h2> Gaming Stats</h2>
+      <div class="stats-container">
+        <div class="stat">
+          <h3>Total Games</h3>
+          <p id="totalGames"></p>
+        </div>
+        <div class="stat">
+          <h3>Games Completed</h3>
+          <p id="gamesCompleted"></p>
+        </div>
+        <div class="stat">
+          <h3>Games In Progress</h3>
+          <p id="gamesInProgress"></p>
+        </div>
+        <div class="stat">
+          <h3>Wishlist Games</h3>
+          <p id="wishlistCount"></p>
+        </div>
+      </div>
+    </section>
+
+<!-- have to keep this cuz if not i get errors in app.js and the rest doesnt work, better than making a whole new js for this  --> 
     <div id="popUp">
-    <h2 id="popUpTitle"></h2>
-    <img id="popUpClose" src="images/close.png" alt="Close" />
-    <img id="popUpImage" src="" alt="Game Image" />
-    <p id="popUpDescription"></p>
-    <img id="popUpBackward" src="images/arrowbackward.png" alt="Back" />
-    <img id="popUpForward" src="images/arrowforward.png" alt="Forward" />
-    </div>
+      <h2 id="popUpTitle"></h2>
+      <img id="popUpClose" src="images/close.png" alt="Close" />
+      <img id="popUpImage" src="" alt="Game Image" />
+      <p id="popUpDescription"></p>
+      <img id="popUpBackward" src="images/arrowbackward.png" alt="Back" />
+      <img id="popUpForward" src="images/arrowforward.png" alt="Forward" />
+  </div>
 
   </body>
   <script src="app.js"></script>
+
+<footer>
+  <nav>
+    <a id ="about" href="about.html">About</a>
+    <a id ="contact" href="contact.html">Contact</a>
+    <a id ="roadmap"  href="roadmap.html">Roadmap</a>
+  </nav>
+  <div id="socialMedia">
+    <a href="https://www.linkedin.com/in/rohan-memon-b0879a247/" target="_blank">
+      <img id="linkedin" src="images/linkedin.png" alt="LinkedIn" />
+    </a>
+    <a href="https://github.com/rmemon06" target="_blank">
+      <img id="github" src="images/github.png" alt="Github" />
+    </a>
+  </div>
+</footer>
 </html>
