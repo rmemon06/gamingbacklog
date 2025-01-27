@@ -1,3 +1,5 @@
+<!--8798266208F135FF5A62042E884A7C94-->
+<!--steam api key-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,52 +7,104 @@
     <title>Backlog</title>
     <link rel="stylesheet" href="styles.css" /> 
   </head>
-  <body>
+  <body id="indexPage">
     <header>
         <div id="topBar">
             <img id="logo" src="images/logo.png" alt="Backlog logo" />
             <nav>
-                <a href="index.html">Home</a>
+                <a href="#" data-page="Home">Home</a>
                 <div class="dropdown">
                     <button class="dropbtn">Lists</button>
                     <div class="dropdown-content">
-                        <a href="games.html">All Games</a>
-                        <a href="topgames.html">Top Games</a>
-                        <a href="gamesPlaying.html">Games In Progress</a>
-                        <a href="gamesToPlay.html">Games To Play</a>
-                        <a href="wishlist.html">Wishlist</a>
+                        <a href="#" data-page="myGames"> My Games</a>
+                        <a href="#" data-page="completedGames">Completed</a>
+                        <a href="#" data-page="topGames">Top Games</a>
+                        <a href="#" data-page="gamesPlaying">Games In Progress</a>
+                        <a href="#" data-page="gamesToPlay">Games To Play</a>
+                        <a href="#" data-page="wishlist">Wishlist</a>
+
                     </div>
                 </div>
-                <a href="reviews.html">Reviews</a>
+                
             </nav>
+            <div id="gameAddButton">
+              <img id="addGame" src="images/add.png" alt="Add Game" />
+            </div>
         </div>
         
-    </header>
-    <div id="top">
-      <h1>Rohans Backlog</h1>
-    </div>
-    
-    <section id="quickStats">
-      <h2> Gaming Stats</h2>
-      <div class="stats-container">
-        <div class="stat">
-          <h3>Total Games</h3>
-          <p id="totalGames"></p>
-        </div>
-        <div class="stat">
-          <h3>Games Completed</h3>
-          <p id="gamesCompleted"></p>
-        </div>
-        <div class="stat">
-          <h3>Games In Progress</h3>
-          <p id="gamesInProgress"></p>
-        </div>
-        <div class="stat">
-          <h3>Wishlist Games</h3>
-          <p id="wishlistCount"></p>
-        </div>
+      </header>
+      <div id="top">
+        <h1>Rohans Backlog</h1>
       </div>
-    </section>
+    
+      <section id="quickStats">
+        <h2> Gaming Stats</h2>
+        <div class="stats-container">
+          <div class="stat">
+            <h3>Total Games</h3>
+            <p id="totalGames"></p>
+          </div>
+          <div class="stat">
+            <h3>Games Completed</h3>
+            <p id="gamesCompleted"></p>
+          </div>
+          <div class="stat">
+            <h3>Games In Progress</h3>
+            <p id="gamesInProgress"></p>
+          </div>
+          <div class="stat">
+            <h3>Wishlist Games</h3>
+            <p id="wishlistCount"></p>
+          </div>
+        </div>
+      </section>
+
+    <main id ="content">
+   
+    </main>
+
+    <div id="addGamePopUp">
+      <h2>Add Game</h2>
+      <img id="addGameClose" src="images/close.png" alt="Close" />
+      <form id="addGameMyGames">
+        <label for="gameName">Game Name:</label>
+        <input type="text" id="gameName" name="gameName" required />
+        <textarea id="userSummary" name="userSummary" placeholder="User Summary"></textarea>
+        <button type="submit">Add Game</button>
+        <div id ="listCheckboxes">
+            <label for="gamePlaying">
+            <input type="checkbox" id="gamePlaying" name="gamePlaying" value="playing" />
+            Playing
+            </label>
+            <label for="gameToPlay">
+            <input type="checkbox" id="gameToPlay" name="gameToPlay" value="toPlay" />
+            To Play
+            </label>
+            <label for="favoriteGame">
+            <input type="checkbox" id="favoriteGame" name="favoriteGame" value="fav" />
+            Favorite  
+            </label>
+            <label for="gameWishlist">
+            <input type="checkbox" id="gameWishlist" name="gameWishlist" value="wishlist" />
+            Wishlist
+            </label>
+            <label for="completedGame">
+            <input type="checkbox" id="completedGame" name="completedGame" value="completed" />
+            Completed
+            </label>
+            <div class ="addGameStarRating">
+              <span onclick="gfg(1, 'addGameStars')" class="star">★</span>
+              <span onclick="gfg(2, 'addGameStars')" class="star">★</span>
+              <span onclick="gfg(3, 'addGameStars')" class="star">★</span>
+              <span onclick="gfg(4, 'addGameStars')" class="star">★</span>
+              <span onclick="gfg(5, 'addGameStars')" class="star">★</span>
+            </div>
+        </div>
+      </form>
+      
+    </div>
+
+
 
 <!-- have to keep this cuz if not i get errors in app.js and the rest doesnt work, better than making a whole new js for this  --> 
     <div id="popUp">
@@ -59,6 +113,15 @@
       <img id="popUpImage" src="" alt="Game Image" />
       <p id="popUpDescription"></p>
       <img id="popUpBackward" src="images/arrowbackward.png" alt="Back" />
+      <p id ="popUpGenres"></p>
+      <div id= "popUpStarRating" class ="popUpStarRating">
+        <p id="popUpRating"> Rating:</p>
+        <span onclick="starsInPop(1,'popUpStarRating')" class="starPop">★</span>
+        <span onclick="starsInPop(2,'popUpStarRating')" class="starPop">★</span>
+        <span onclick="starsInPop(3,'popUpStarRating')" class="starPop">★</span>
+        <span onclick="starsInPop(4,'popUpStarRating')" class="starPop">★</span>
+        <span onclick="starsInPop(5,'popUpStarRating')" class="starPop">★</span>
+      </div>
       <img id="popUpForward" src="images/arrowforward.png" alt="Forward" />
   </div>
 
@@ -67,9 +130,9 @@
 
 <footer>
   <nav>
-    <a id ="about" href="about.html">About</a>
-    <a id ="contact" href="contact.html">Contact</a>
-    <a id ="roadmap"  href="roadmap.html">Roadmap</a>
+    <a id ="about" href="#" data-page="about">About</a>
+    <a id ="contact" href="#" data-page="contact">Contact</a>
+    <a id ="roadmap"  href="#" data-page="roadmap">Roadmap</a>
   </nav>
   <div id="socialMedia">
     <a href="https://www.linkedin.com/in/rohan-memon-b0879a247/" target="_blank">

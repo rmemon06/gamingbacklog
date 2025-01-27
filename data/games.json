@@ -1,179 +1,561 @@
 [
-    {
-        "id": 1,
-        "name": "The Last of Us Part I",
-        "genreIDs": [1,2,3,4],
-        "description": "In a hostile, post-pandemic world, Joel and Ellie, brought together by desperate circumstances, must rely on each other to survive a brutal journey across what remains of the United States.",
-        "image": "/images/thelastofus1.png",
-        "list": [1,4,6]
-    },
-    {
+  {
+    "id": 799265,
+    "name": "The Last of Us Part I",
+    "genres": [
+      {
         "id": 2,
-        "name": "The Last of Us Part II",
-        "genreID": [1,2,3,4],
-        "description": "Five years after the events of The Last of Us, Ellie embarks on another journey through a post-apocalyptic America on a mission of vengeance against a mysterious militia..",
-        "image": "/images/thelastofus2.png",
-        "list": [1,4,6]
-    },
-    {
+        "name": "Shooter",
+        "slug": "shooter"
+      },
+      {
         "id": 3,
-        "name": "Hollow Knight",
-        "genreID": [1,5,6],
-        "description": "Hollow Knight is a classically styled 2D action adventure across a vast interconnected world. Explore twisting caverns, ancient cities and deadly wastes; battle tainted creatures and befriend bizarre bugs; and solve ancient mysteries at the kingdom's heart.",
-        "image": "/images/hollowknight.png",
-        "list": [1,4,6]
-    },
-    {
+        "name": "Adventure",
+        "slug": "adventure"
+      },
+      {
         "id": 4,
-        "name": "Subnautica",
-        "genreID": [2,5],
-        "description": "Descend into the depths of an alien underwater world filled with wonder and peril. Craft equipment, pilot submarines and out-smart wildlife to explore lush coral reefs, volcanoes, cave systems, and more - all while trying to survive.",
-        "image": "/images/subnautica.png",
-        "list": [1,4,6]
-    },
-    {
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/71d/71df9e759b2246f9769126c98ac997fc.jpg",
+    "description": "My favourite game of all time, the storytelling is so simple but perfect, having very specific arcs which are easy to follow along with and lots of memorable characters but just a perfect journey with Joel and Ellie making them such likeable characters",
+    "list": [
+      1,
+      4,
+      6
+    ],
+    "rating": 5
+  },
+  {
+    "id": 972403,
+    "name": "The Last of Us Part II Remastered",
+    "genres": [
+      {
+        "id": 3,
+        "name": "Adventure",
+        "slug": "adventure"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/d09/d099b508a1cfb5bd2f2928b50e0784a5.jpg",
+    "description": "Alot of people hate this game but I think its an absolute masterpiece, although I did not think that after my first play through because it is very disjointed and difficult to follow but once you overcome the random jumps between characters and points in time it is a masterclass in writing. People that hate Joels ... and people who hate Abby are stupid because they're what make the story so good. That's not even including the fact the gameplay is as smooth as butter and 100x better than the first game. ",
+    "list": [
+      1,
+      4,
+      6
+    ],
+    "rating": 5
+  },
+  {
+    "id": 2093,
+    "name": "No Man's Sky",
+    "genres": [
+      {
+        "id": 3,
+        "name": "Adventure",
+        "slug": "adventure"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      },
+      {
         "id": 5,
-        "name": "Red Dead Redemption",
-        "genreID": [1,3,5],
-        "description": "Arthur Morgan and the Van der Linde gang are outlaws on the run. With federal agents and the best bounty hunters in the nation massing on their heels, the gang must rob, steal and fight their way across the rugged heartland of America in order to survive. As deepening internal divisions threaten to tear the gang apart, Arthur must make a choice between his own ideals and loyalty to the gang who raised him.",
-        "image": "/images/reddeadredemption2.png",
-        "list": [1,4,6]
-    },
-    {
-        "id": 6,
-        "name": "The Walking Dead",
-        "genreID": [3,4],
-        "description": "Play as Lee Everett, a convicted criminal, who has been given a second chance at life in a world devastated by the undead. With corpses returning to life and survivors stopping at nothing to maintain their own safety, protecting an orphaned girl named Clementine may offer him redemption in a world gone to hell.",
-        "image": "/images/thewalkingdead.png",
-        "list": [1,4,6]
-    },
-    {
-        "id": 7,
-        "name": "Spider-Man",
-        "genreID": [1,5],
-        "description": "Swing through New York as the iconic superhero.",
-        "image": "/images/spiderman.png",
-        "list": [1,4,6]
-    },
-    {
-        "id": 8,
-        "name": "Spider-Man: Miles Morales",
-        "genreID":[1,5],
-        "description": "Step into Miles Morales' shoes in this Spider-Man sequel.",
-        "image": "/images/spidermanmilesmorales.png",
-        "list": [1,4,6]
-    },
-    {
-        "id": 9,
-        "name": "Dying Light",
-        "genreID": [1,2,4,5],
-        "description": "Parkour and survival in a zombie-infested world.",
-        "image": "/images/dyinglight.png",
-        "list": [1,4,6]
-    },
-    {
-        "id": 10,
-        "name": "Assassin's Creed II",
-        "genreID": [3,5],
-        "description": "The story of Ezio Auditore da Firenze.",
-        "image": "/images/assassinscreed2.png",
-        "list": [1,4,6]
-    },
-    {
-        "id": 11,
-        "name": "Dishonored",
-        "genreID": [3],
-        "description": "Stealth, strategy, and supernatural abilities.",
-        "image": "/images/dishonored.png",
-        "list": [1,4,6]
-    },
-    {
-        "id": 12,
-        "name": "Dave the Diver",
-        "genreID": [3,5],
-        "description": "A unique mix of diving and restaurant management.",
-        "image": "/images/davethediver.png",
-        "list": [1,6]
-    },
-    {
-        "id": 13,
-        "name": "Resident Evil 2",
-        "genreID": [2,4,8],
-        "description": "A terrifying survival horror remake.",
-        "image": "/images/residentevil2.png",
-        "list": [1,6]
-    },
-    {
+        "name": "RPG",
+        "slug": "role-playing-games-rpg"
+      },
+      {
         "id": 14,
-        "name": "Hades",
-        "genreID": [3,6],
-        "description": "A rogue-like dungeon crawler in Greek mythology.",
-        "image": "/images/hades.png",
-        "list": [1,3,6]
-    },
-    {
-        "id": 15,
-        "name": "Sekiro: Shadows Die Twice",
-        "genreID": [1,3],
-        "description": "A samurai action game with challenging combat.",
-        "image": "/images/sekiro.png",
-        "list": [1,3]
-    },
-    {
-        "id": 16,
-        "name": "Devil Daggers",
-        "genreID": [1],
-        "description": "Fast-paced FPS with an arcade feel.",
-        "image": "/images/devildaggers.png",
-        "list": [1,3]
-    },
-    {
-        "id": 17,
-        "name": "Katana ZERO",
-        "genreID": [3,6],
-        "description": "Stylish action platformer with a gripping narrative.",
-        "image": "/images/katanazero.png",
-        "list": [1,6]
-    },
-    {
-        "id": 18,
-        "name": "Outlast",
-        "genreID": [8],
-        "description": "A terrifying asylum exploration horror.",
-        "image": "/images/outlast.png",
-        "list": [1,2]
-    },
-    {
-        "id": 19,
-        "name": "South Park: The Stick of Truth",
-        "genreID": [3,5],
-        "description": "",
-        "image": "/images/southpark.png",
-        "list": [1,6]
-    },
-    {
-        "id": 20,
-        "name": "Stardew Valley",
-        "genreID": [3],
-        "description": "",
-        "image": "/images/stardewvalley.png",
-        "list": [1,2]
-    },
-    {
-        "id": 21,
-        "name": "The Witcher 3: Wild Hunt",
-        "genreID": [1,3,5],
-        "description": "",
-        "image": "/images/thewitcher3.png",
-        "list": [1,2]
-    },
-    {
-        "id": 22,
-        "name": "The Forest",
-        "genreID": [2],
-        "description": "",
-        "image": "/images/theforest.png",
-        "list": [1,3]
-    }
-
+        "name": "Simulation",
+        "slug": "simulation"
+      },
+      {
+        "id": 51,
+        "name": "Indie",
+        "slug": "indie"
+      },
+      {
+        "id": 59,
+        "name": "Massively Multiplayer",
+        "slug": "massively-multiplayer"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/174/1743b3dd185bda4a7be349347d4064df.jpg",
+    "description": "",
+    "list": [
+      1,
+      2
+    ],
+    "rating": 0
+  },
+  {
+    "id": 2551,
+    "name": "Dark Souls III",
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      },
+      {
+        "id": 5,
+        "name": "RPG",
+        "slug": "role-playing-games-rpg"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/da1/da1b267764d77221f07a4386b6548e5a.jpg",
+    "description": "Played through about half of this, it was very fun and challenging, but after taking a break from it It would be very hard to get back into it so I would probably have to restart. Just gotta find the time to restart ",
+    "list": [
+      1,
+      3
+    ],
+    "rating": 3
+  },
+  {
+    "id": 28,
+    "name": "Red Dead Redemption 2",
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg",
+    "description": "hjgijghujguigyuigiuguigiu",
+    "list": [
+      1,
+      4,
+      6
+    ],
+    "rating": 5
+  },
+  {
+    "id": 41494,
+    "name": "Cyberpunk 2077",
+    "genres": [
+      {
+        "id": 2,
+        "name": "Shooter",
+        "slug": "shooter"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      },
+      {
+        "id": 5,
+        "name": "RPG",
+        "slug": "role-playing-games-rpg"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/26d/26d4437715bee60138dab4a7c8c59c92.jpg",
+    "description": "Been wanting to play this especially with the release of the new dlc, but its still pretty expensive and i know its very long",
+    "list": [
+      5
+    ],
+    "rating": 2
+  },
+  {
+    "id": 9767,
+    "name": "Hollow Knight",
+    "genres": [
+      {
+        "id": 83,
+        "name": "Platformer",
+        "slug": "platformer"
+      },
+      {
+        "id": 51,
+        "name": "Indie",
+        "slug": "indie"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/4cf/4cfc6b7f1850590a4634b08bfab308ab.jpg",
+    "description": "One of my favourite games 100%, definetley the msot unique experience ive had in any sort of media, the slow unravelling of the plot and story through random npc interactions and points around the world is so immersive. The combat and all the content is addictive and ive put well over 200 hours into it, and still havent got 100%. ",
+    "list": [
+      1,
+      3,
+      4,
+      6
+    ],
+    "rating": 5
+  },
+  {
+    "id": 58550,
+    "name": "Ghost of Tsushima",
+    "genres": [
+      {
+        "id": 3,
+        "name": "Adventure",
+        "slug": "adventure"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      },
+      {
+        "id": 5,
+        "name": "RPG",
+        "slug": "role-playing-games-rpg"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/f24/f2493ea338fe7bd3c7d73750a85a0959.jpeg",
+    "description": "",
+    "list": [
+      5
+    ],
+    "rating": 0
+  },
+  {
+    "id": 795632,
+    "name": "Resident Evil 4",
+    "genres": [
+      {
+        "id": 3,
+        "name": "Adventure",
+        "slug": "adventure"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/51a/51a404b9918a0b19fc704a3ca248c69f.jpg",
+    "description": "",
+    "list": [
+      5
+    ],
+    "rating": 0
+  },
+  {
+    "id": 868086,
+    "name": "Silent Hill 2",
+    "genres": [
+      {
+        "id": 3,
+        "name": "Adventure",
+        "slug": "adventure"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/09b/09b41c1a2c5761c5b1772a4ae238bb0e.jpg",
+    "description": "",
+    "list": [
+      5
+    ],
+    "rating": 0
+  },
+  {
+    "id": 494384,
+    "name": "God of War: Ragnarök",
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/1c3/1c305096502c475c00276c827f0fd697.jpg",
+    "description": "",
+    "list": [
+      5
+    ],
+    "rating": 0
+  },
+  {
+    "id": 494382,
+    "name": "Final Fantasy XVI",
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      },
+      {
+        "id": 5,
+        "name": "RPG",
+        "slug": "role-playing-games-rpg"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/22e/22e68bb62b3013283972cecf98ed51dc.jpg",
+    "description": "",
+    "list": [
+      5
+    ],
+    "rating": 0
+  },
+  {
+    "id": 481913,
+    "name": "Black Myth: Wukong",
+    "genres": [
+      {
+        "id": 3,
+        "name": "Adventure",
+        "slug": "adventure"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      },
+      {
+        "id": 5,
+        "name": "RPG",
+        "slug": "role-playing-games-rpg"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/779/77988e89f7862afeede524420aa251b0.jpg",
+    "description": "",
+    "list": [
+      5
+    ],
+    "rating": 0
+  },
+  {
+    "id": 326243,
+    "name": "Elden Ring",
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      },
+      {
+        "id": 5,
+        "name": "RPG",
+        "slug": "role-playing-games-rpg"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/b29/b294fdd866dcdb643e7bab370a552855.jpg",
+    "description": "",
+    "list": [
+      5
+    ],
+    "rating": 0
+  },
+  {
+    "id": 906504,
+    "name": "Nine Sols",
+    "genres": [
+      {
+        "id": 51,
+        "name": "Indie",
+        "slug": "indie"
+      },
+      {
+        "id": 83,
+        "name": "Platformer",
+        "slug": "platformer"
+      },
+      {
+        "id": 3,
+        "name": "Adventure",
+        "slug": "adventure"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/cee/cee02d983e2e1e457caa562420f532fb.jpg",
+    "description": "",
+    "list": [
+      5
+    ],
+    "rating": 0
+  },
+  {
+    "id": 10419,
+    "name": "Subnautica",
+    "genres": [
+      {
+        "id": 51,
+        "name": "Indie",
+        "slug": "indie"
+      },
+      {
+        "id": 3,
+        "name": "Adventure",
+        "slug": "adventure"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/739/73990e3ec9f43a9e8ecafe207fa4f368.jpg",
+    "description": "One of the best adventure survival games, has a similar world building to hollow knight where there are lots of different locations and upon discovering stuff you learn important plot points, gameplay is alright but nothing special, the world is where it shines ",
+    "list": [
+      1,
+      4,
+      6
+    ],
+    "rating": 4
+  },
+  {
+    "id": 28568,
+    "name": "Assassin's Creed II",
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/1be/1bed7fae69d1004c09dfe1101d5a3a94.jpg",
+    "description": "My earliest game that I ever finished when I was around 6-7, although the story was nothing incredible it was so intricate and impressive when I was a kid and ezio is just one of the best and most likeable protagonists of any game, shame to see whats happened to the assassins creed games now ",
+    "list": [
+      1,
+      2,
+      4,
+      6
+    ],
+    "rating": 5
+  },
+  {
+    "id": 50734,
+    "name": "Sekiro: Shadows Die Twice",
+    "genres": [
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      },
+      {
+        "id": 5,
+        "name": "RPG",
+        "slug": "role-playing-games-rpg"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/67f/67f62d1f062a6164f57575e0604ee9f6.jpg",
+    "description": "This gameplay was so damn fun and it is hard as shit, but i havent played  in a while and its not finished so starting over is the best bet so when I have time imma run through the full game ",
+    "list": [
+      1,
+      3
+    ],
+    "rating": 2
+  },
+  {
+    "id": 42857,
+    "name": "Dead Island 2",
+    "genres": [
+      {
+        "id": 3,
+        "name": "Adventure",
+        "slug": "adventure"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/9cd/9cd22ae5aebd922f96f2bc50efab83df.jpg",
+    "description": "",
+    "list": [
+      5
+    ],
+    "rating": 0
+  },
+  {
+    "id": 801032,
+    "name": "High on Life",
+    "genres": [
+      {
+        "id": 2,
+        "name": "Shooter",
+        "slug": "shooter"
+      },
+      {
+        "id": 3,
+        "name": "Adventure",
+        "slug": "adventure"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/2e7/2e732a02c29c84ca177855848932a5aa.jpg",
+    "description": "",
+    "list": [
+      1,
+      3
+    ],
+    "rating": 4
+  },
+  {
+    "id": 258322,
+    "name": "Blasphemous",
+    "genres": [
+      {
+        "id": 51,
+        "name": "Indie",
+        "slug": "indie"
+      },
+      {
+        "id": 83,
+        "name": "Platformer",
+        "slug": "platformer"
+      },
+      {
+        "id": 3,
+        "name": "Adventure",
+        "slug": "adventure"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/b01/b01aa6b2d6d4f683203e9471a8b8d5b5.jpg",
+    "description": "",
+    "list": [
+      5
+    ],
+    "rating": 0
+  },
+  {
+    "id": 3790,
+    "name": "Outlast",
+    "genres": [
+      {
+        "id": 51,
+        "name": "Indie",
+        "slug": "indie"
+      },
+      {
+        "id": 4,
+        "name": "Action",
+        "slug": "action"
+      }
+    ],
+    "image": "https://media.rawg.io/media/games/9dd/9ddabb34840ea9227556670606cf8ea3.jpg",
+    "description": "One of my favourite horror games of all time, shi scary as helllll",
+    "list": [
+      1,
+      2,
+      6
+    ],
+    "rating": 4
+  }
 ]

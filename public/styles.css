@@ -1,11 +1,14 @@
-/* Reset margins and paddings */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Style for the body */
+#myGamesHeader{
+    text-align: center;
+    color: white;
+}
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: black;
@@ -29,6 +32,9 @@ nav{
 
 }
 
+/*------------------------------------------------------------------------------------------------------------*/
+/*drop down section*/
+/*------------------------------------------------------------------------------------------------------------*/
 .dropbtn{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     width: 75px;
@@ -38,6 +44,7 @@ nav{
     font-size: 20px;
     border: none;
     cursor: pointer;
+    text-shadow: 1px 3px 10px rgb(0, 0, 0);
 }
 .dropdown-content{
     display: none;
@@ -51,6 +58,7 @@ nav{
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    text-shadow: 1px 3px 10px rgb(0, 0, 0);
   }
 
 .dropbtn:hover{
@@ -67,12 +75,14 @@ nav{
 /* Logo */
 #logo {
     width: 150px; 
+    -webkit-filter: drop-shadow(5px 5px 7px rgb(0, 0, 0));
 }
 
 nav a {
     color: white;
     text-decoration: none;
     margin: 0 10px;
+    text-shadow: 1px 3px 10px #000000;
 }
 
 nav a:hover {
@@ -80,7 +90,10 @@ nav a:hover {
 }
 
 
-#gamesToPlay, #gamesPlaying, #wishlist, #allGames, #topGames{
+/*------------------------------------------------------------------------------------------------------------*/
+/*section for my lists*/
+/*------------------------------------------------------------------------------------------------------------*/
+#gamesToPlay, #gamesPlaying, #wishlist, #myGames, #topGames, #completedGames{
     display: flex;
     flex-wrap: wrap ;
     justify-content: center;
@@ -116,6 +129,10 @@ nav a:hover {
 }
 
 
+/*------------------------------------------------------------------------------------------------------------*/
+/*Section to style my pop up*/
+/*------------------------------------------------------------------------------------------------------------*/
+
 #popUp{
         
         background-color: #333;   
@@ -130,7 +147,8 @@ nav a:hover {
         display: grid;
         grid-template-areas: 
         "title cross"
-        "image description" 
+        "image description"
+        "------ popUpStarRating"
         "arrowb arrowf";
         grid-template-columns: 1fr auto;
         grid-template-rows: auto 1fr;
@@ -179,9 +197,7 @@ nav a:hover {
     height: 20px;
     justify-self: start;
     align-self: start;
-    -webkit-filter: drop-shadow(0px 0px 0 white) 
-    drop-shadow(0px 0px 0 white)
-    drop-shadow(0px 0px 0 white);
+   
 }
 
 #popUpForward{
@@ -191,16 +207,13 @@ nav a:hover {
     height: 20px;
     justify-self: end;
     align-self: end;
-    -webkit-filter: drop-shadow(0px 0px 0 white) 
-    drop-shadow(0px 0px 0 white)
-    drop-shadow(0px 0px 0 white);
+   
 }
 
 #popUpClose{
     cursor: pointer;
-    -webkit-filter: drop-shadow(0px 0px 0 white) 
-    drop-shadow(0px 0px 0 white)
-    drop-shadow(0px 0px 0 white);
+  
+  
 }
 
 
@@ -219,21 +232,104 @@ nav a:hover {
     transition: visibility 0s 0.3s, opacity 0.3s linear;
 }
 
-h1{
-    font-size: 25px;
-    color: white;
-    text-align: center;
-    margin-top: 10px;
- 
+#popUpStarRating{
+    margin-top: -10px;
+}
 
-}
-h2{
-    font-size: 20px;
+/*------------------------------------------------------------------------------------------------------------*/
+/*POP UP STYLING FOR MY ADD GAME POPUP*/
+/*------------------------------------------------------------------------------------------------------------*/
+#addGamePopUp {
+    background-color: #333;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    width: 600px;
+    height: auto; /* Let the height adjust dynamically */
+    z-index: -10;
+    border-radius: 10px;
     color: white;
-    text-align: center;
-    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
 }
-#quickStats {
+
+#addGamePopUp.open {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s linear;
+    z-index: 999;
+}
+
+#addGameClose {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    justify-content: end;
+    align-self: flex-end;
+}
+
+#addGamePopUp h2 {
+    font-size: 20px;
+    margin: 10px;
+    color: white;
+    text-align: left; /* Move title to the left */
+    text-shadow: 1px 3px 1px #656565;
+}
+
+#addGameMyGames {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start; /* Move everything to the left */
+    width: 100%;
+}
+
+#addGameMyGames label,
+#addGameMyGames #gameName {
+    text-align: left; /* Align text to the left */
+    width: 90%; /* Keep width dynamic */
+}
+#addGame{
+    width: 50px;
+}
+#addGame:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: transform 0.4s;
+    -webkit-filter: brightness(0.8);
+}
+#userSummary {
+    width: 90%;
+    height: 100px;
+    padding: 5px;
+    font-family: inherit;
+    border-radius: 5px;
+}
+
+#listCheckboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start; /* Align checkboxes to the left */
+}
+
+#starRatings {
+    display: flex;
+    justify-content: flex-start; /* Align stars to the left */
+    gap: 10px;
+}
+
+/*------------------------------------------------------------------------------------------------------------*/
+/*Stats styling*/
+/*------------------------------------------------------------------------------------------------------------*/
+#quickStats{
     text-align: center;
     padding: 20px;
     background-color: #333;
@@ -252,20 +348,36 @@ h2{
     border-radius: 8px;
     width: 20%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
   }
+
+    .stat:hover{
+        transform: scale(1.05);
+        transition: transform 0.5s;
+    }
   
   .stat h3 {
     margin-bottom: 10px;
     font-size: 18px;
     color: white;
+    text-shadow: 1px 3px 1px #656565;
   }
   
   .stat p {
     font-size: 22px;
     font-weight: bold;
     color: #333;
+    text-shadow: 1px 1.5px 1px #656565;
   }
 
+
+
+  
+
+
+/*------------------------------------------------------------------------------------------------------------*/
+/*footer styling*/
+/*------------------------------------------------------------------------------------------------------------*/
 footer{
     display: flex;
     align-items: center;
@@ -299,18 +411,26 @@ footer a:hover {
     height: auto;
    box-shadow: 1px 1px 10px 1px black;
 }
+
+#linkedin:hover, #github:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: transform 0.4s;
+    -webkit-filter: brightness(0.8);
+}
+
+
 #github{
     width: 50px;
     height: auto;
     -webkit-filter: drop-shadow(5px 5px 10px rgb(0, 0, 0));
 }
 
-footer img:hover{
-    cursor: pointer;
-    transform: scale(1.05);
-    transition: transform 0.4s;
-    -webkit-filter: brightness(0.8);
-}
+
+
+/*------------------------------------------------------------------------------------------------------------*/
+/*quick stats*/
+/*------------------------------------------------------------------------------------------------------------*/
 
 #quickStats p{
     font-size: 20px;
@@ -320,6 +440,7 @@ footer img:hover{
 }
 
 #quickStats {
+    background-color: black;
   margin-bottom: 20px;
 }
 #description{
@@ -329,3 +450,161 @@ footer img:hover{
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+/*------------------------------------------------------------------------------------------------------------*/
+/*star ratings*/
+/*------------------------------------------------------------------------------------------------------------*/
+.addGameStarRating{
+   max-width: 300px;
+    background: #333;
+    
+    margin-left: 90px;
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+   
+  .star {
+    font-size: 40px;
+    cursor: pointer;
+  }
+
+.one,.two,.three,.four,.five{
+    color: #f31212;
+}
+
+.starPop {
+    font-size: 30px;
+    color: #ccc; /* Default unselected color */
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.starPop.selected {
+    color: #f31212; /* Highlighted star color */
+   
+}
+@media (max-width: 480px) {
+    /* Game containers */
+    .gameContainer {
+        width: 100px;
+    }
+
+    .gameContainer img {
+        height: 120px;
+    }
+
+    .gameContainer h2 {
+        font-size: 10px;
+    }
+
+    /* Popups */
+    #popUp, #addGamePopUp {
+        width: 95%;
+        height: auto;
+    }
+
+    #popUpImage {
+        width: 150px;
+        height: 150px;
+    }
+
+    #popUpTitle {
+        font-size: 16px;
+    }
+
+    #popUpDescription {
+        font-size: 12px;
+    }
+
+    /* Footer */
+    footer {
+        font-size: 14px;
+        flex-direction: column;
+        text-align: center;
+        
+    }
+
+    #socialMedia img {
+        width: 60px;
+    }
+}
+/*FOR OTHER SIZES*/
+@media (max-width: 768px) {
+    /* Game containers */
+    .gameContainer {
+        width: 120px;
+    }
+
+    .gameContainer img {
+        height: 150px;
+    }
+
+    .gameContainer h2 {
+        font-size: 12px;
+    }
+
+    /* Popups */
+    #popUp, #addGamePopUp {
+        width: 95%;
+        height: auto;
+    }
+
+    #popUpImage {
+        width: 150px;
+        height: 150px;
+    }
+
+    #popUpTitle {
+        font-size: 16px;
+    }
+
+    #popUpDescription {
+        font-size: 12px;
+    }
+
+    /* Footer */
+    footer {
+        font-size: 14px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .stat h3{
+        font-size: 14px;
+        
+    }
+    .stat{
+        width: 25%;
+    }
+    
+ 
+        #addGamePopUp {
+            width: 95%; /* Take almost full width on small screens */
+            padding: 15px;
+        }
+
+        #addGamePopUp h2{
+            text-align: center;
+            font-size: 16px;
+        }
+    
+        #addGameMyGames {
+            margin-top: 20px;
+        }
+    
+        #userSummary {
+            width: 100%;
+        }
+    
+        #listCheckboxes {
+            gap: 5px; /* Reduce spacing on smaller screens */
+        }
+    
+        #starRatings {
+            flex-wrap: wrap; /* Allow stars to wrap if necessary */
+            gap: 5px;
+            left: 100px;
+        }
+
+}
+
