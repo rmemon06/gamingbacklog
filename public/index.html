@@ -1,5 +1,6 @@
 <!--8798266208F135FF5A62042E884A7C94-->
 <!--steam api key-->
+<!-- this page holds all the html elements which includes: top bar, stats, content div, addGame and addList popUp, popUp for the game, footer-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,22 +14,23 @@
             <img id="logo" src="images/logo.png" alt="Backlog logo" />
             <nav>
                 <a href="#" data-page="Home">Home</a>
+                <!--this drop down, the links are loaded in dynamically by fetching the list using a get request to the lists.json file-->
                 <div class="dropdown">
                     <button class="dropbtn">Lists</button>
-                    <div class="dropdown-content">
-                        <a href="#" data-page="myGames"> My Games</a>
-                        <a href="#" data-page="completedGames">Completed</a>
-                        <a href="#" data-page="topGames">Top Games</a>
-                        <a href="#" data-page="gamesPlaying">Games In Progress</a>
-                        <a href="#" data-page="gamesToPlay">Games To Play</a>
-                        <a href="#" data-page="wishlist">Wishlist</a>
-
+                    <div  class="dropdown-content" id="listsDropdown">
+                      
                     </div>
                 </div>
                 
             </nav>
+            <!--These buttons trigger the pop ups-->
             <div id="gameAddButton">
+              <p id="addGameTitle">Add Game</p>
               <img id="addGame" src="images/add.png" alt="Add Game" />
+            </div>
+            <div id="listAddButton">
+              <p id="addListTitle">Add List</p>
+              <img id="addList" src="images/add.png" alt="Add List" />
             </div>
         </div>
         
@@ -36,7 +38,7 @@
       <div id="top">
         <h1>Rohans Backlog</h1>
       </div>
-    
+    <!--Stats are the boxes in which the data of the number of the games is fetched by getting the games from the endpoint-->
       <section id="quickStats">
         <h2> Gaming Stats</h2>
         <div class="stats-container">
@@ -63,6 +65,7 @@
    
     </main>
 
+  <!--Add game pop up, this is where you search for a game and then write the description, add the rating and add it to lists-->
     <div id="addGamePopUp">
       <h2>Add Game</h2>
       <img id="addGameClose" src="images/close.png" alt="Close" />
@@ -72,49 +75,43 @@
         <textarea id="userSummary" name="userSummary" placeholder="User Summary"></textarea>
         <button type="submit">Add Game</button>
         <div id ="listCheckboxes">
-            <label for="gamePlaying">
-            <input type="checkbox" id="gamePlaying" name="gamePlaying" value="playing" />
-            Playing
-            </label>
-            <label for="gameToPlay">
-            <input type="checkbox" id="gameToPlay" name="gameToPlay" value="toPlay" />
-            To Play
-            </label>
-            <label for="favoriteGame">
-            <input type="checkbox" id="favoriteGame" name="favoriteGame" value="fav" />
-            Favorite  
-            </label>
-            <label for="gameWishlist">
-            <input type="checkbox" id="gameWishlist" name="gameWishlist" value="wishlist" />
-            Wishlist
-            </label>
-            <label for="completedGame">
-            <input type="checkbox" id="completedGame" name="completedGame" value="completed" />
-            Completed
-            </label>
-            <div class ="addGameStarRating">
+        </div>
+            <div class ="addGameStarRating" id="addGameStars">
               <span onclick="gfg(1, 'addGameStars')" class="star">★</span>
               <span onclick="gfg(2, 'addGameStars')" class="star">★</span>
               <span onclick="gfg(3, 'addGameStars')" class="star">★</span>
               <span onclick="gfg(4, 'addGameStars')" class="star">★</span>
               <span onclick="gfg(5, 'addGameStars')" class="star">★</span>
             </div>
-        </div>
+        
       </form>
       
+    </div>
+<!-- add List pop up is similar to the add game pop up but much simpler, just write a lsit you wanna create and then its added with a post request to the lists.json file-->
+    <div id="addListPopUp" class="close">
+      <h2>Add List</h2>
+      <img id="addListClose" src="images/close.png" alt="Close" />
+      <form id="addListForm">
+        <label for="listName">List Name:</label>
+        <input type="text" id="listName" name="listName" required />
+        <button type="submit">Add List</button>
+      </form>
     </div>
 
 
 
-<!-- have to keep this cuz if not i get errors in app.js and the rest doesnt work, better than making a whole new js for this  --> 
+<!-- this popUp is what becomes visible upon pressing one of the game images, it includes the image, the name, the users summary and rating, then the ability to redo the summary and also delete the game, and go back and forth between games --> 
     <div id="popUp">
       <h2 id="popUpTitle"></h2>
       <img id="popUpClose" src="images/close.png" alt="Close" />
       <img id="popUpImage" src="" alt="Game Image" />
       <p id="popUpDescription"></p>
+      <textarea id="popUpDescriptionEdit" placeholder="Edit description..."></textarea>
+      <button id="saveDescriptionBtn">Save Description</button>  
       <img id="popUpBackward" src="images/arrowbackward.png" alt="Back" />
       <p id ="popUpGenres"></p>
       <div id= "popUpStarRating" class ="popUpStarRating">
+        <button id="deleteGameBtn">Delete Game</button> 
         <p id="popUpRating"> Rating:</p>
         <span onclick="starsInPop(1,'popUpStarRating')" class="starPop">★</span>
         <span onclick="starsInPop(2,'popUpStarRating')" class="starPop">★</span>
@@ -124,10 +121,9 @@
       </div>
       <img id="popUpForward" src="images/arrowforward.png" alt="Forward" />
   </div>
-
-  </body>
-  <script src="app.js"></script>
-
+ 
+  
+<!--footer just includes some extra pages which are loaded dynamically with ajax to the content div and then some social media links -->
 <footer>
   <nav>
     <a id ="about" href="#" data-page="about">About</a>
@@ -143,4 +139,6 @@
     </a>
   </div>
 </footer>
+</body>
+<script src="app.js" ></script>
 </html>

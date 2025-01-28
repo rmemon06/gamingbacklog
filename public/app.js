@@ -14,111 +14,125 @@ const popUpGenres = document.getElementById('popUpGenres')
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const contentDiv = document.getElementById("content");
-  
-    // Function to load page content
-    function loadPage(page) {
-        currentPage = page;
-        fetch(`${page}.html`)
-        .then(response => {
-            if (!response.ok) throw new Error("Page not found");
-            return response.text();
-        })
-        .then(data => {
-            contentDiv.innerHTML = data;
-
-            // Wait until the myGames page is loaded and call getListOfGames
-            if (page === 'myGames') {
-                // Wait for the myGames container to exist
-                const myGamesContainer = document.getElementById('myGames');
-                if (myGamesContainer) {
-                    getListOfGames(myGamesContainer); // Pass the container to the function
-                } else {
-                    console.error('My Games container not found');
-                }
-            }
-            if (page === 'topGames') {
-                // Wait for the topGames container to exist
-                const topGamesContainer = document.getElementById('topGames');
-                if (topGamesContainer) {
-                    getListOfGames(topGamesContainer); // Pass the container to the function
-                } else {
-                    console.error('top Games container not found');
-                }
-            }
-            if (page === 'completedGames') {
-                // Wait for the myGames container to exist
-                const completedGamesContainer  = document.getElementById('completedGames');
-                if (completedGamesContainer) {
-                    getListOfGames(completedGamesContainer); // Pass the container to the function
-                } else {
-                    console.error('Completed Games container not found');
-                }
-            }
-            if (page === 'gamesToPlay') {
-                // Wait for the myGames container to exist
-                const gamesToPlayContainer  = document.getElementById('gamesToPlay');
-                if (gamesToPlayContainer) {
-                    getListOfGames(gamesToPlayContainer); // Pass the container to the function
-                } else {
-                    console.error('games to play container not found');
-                }
-            }
-            if (page === 'gamesPlaying') {
-                // Wait for the myGames container to exist
-                const gamesPlayingContainer  = document.getElementById('gamesPlaying');
-                if (gamesPlayingContainer) {
-                    getListOfGames(gamesPlayingContainer); // Pass the container to the function
-                } else {
-                    console.error('games playing container not found');
-                }
-            }
-            if (page === 'wishlist') {
-                // Wait for the myGames container to exist
-                const wishlistContainer  = document.getElementById('wishlist');
-                if (wishlistContainer) {
-                    getListOfGames(wishlistContainer); // Pass the container to the function
-                } else {
-                    console.error('games playing container not found');
-                }
-            }
-
-        })
-        .catch(err => {
-            contentDiv.innerHTML = `<p>Error loading page: ${err.message}</p>`;
-        });
-    }
-
-    // Event listener for navigation links
-    document.querySelectorAll("nav a").forEach(link => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
-            const page = event.target.getAttribute("data-page");
-            loadPage(page);
-        });
-    });
-
-    loadPage("home");  // Load the default page
-});
-
-// Function to get list of games
-function getListOfGames(container) {
-    console.log("Fetching games...");
-    fetch('/api/games')
+    const dropdownContainer = document.getElementById("listsDropdown");
+    let currentListId = 1;
+    // Function to fetch lists and populate the dropdown
+    function loadLists() {
+        fetch('/api/lists') // Fetch lists from the backend
+            .then(res => res.json())
+            .then(data => {
+                dropdownContainer.innerHTML = ""; // Clear existing links
+                
+                data.forEach(list => {
+                    const link = document.createElement("a");
+                    link.href = "#"; // Prevent default navigation for now
+                    link.textContent = list.name; // Set the list name as the link text
+                    link.dataset.listId = list.id; // Store the list ID for later use
+                    
+                    // Add event listener for dynamic page loading
+                    link.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        loadGamesForList(list.id, list.name); // Custom function to handle list content
+                    });
+                    const deleteIcon = document.createElement("img");
+                    deleteIcon.src = "images/close.png"; // Path to your close.png
+                    
+    
+    
+                    deleteIcon.addEventListener("click", (e) => {
+                        e.stopPropagation(); // Prevent event bubbling to the link
+                        if (confirm(`Are you sure you want to delete the list "${list.name}"?`)) {
+                            deleteList(list.id); // Call the function to delete the list
+                        }
+                    });
+    
+                    // Append the link and delete button to the container
+                    dropdownContainer.appendChild(link);
+                    dropdownContainer.appendChild(deleteIcon);
+                });
+            })
+            .catch(err => {
+                console.error("Error loading lists:", err);
+            });
+    }function deleteList(listId) {
+    fetch(`/api/lists/${listId}`, {
+        method: 'DELETE',
+    })
         .then(res => res.json())
         .then(data => {
-            // Clear the container for each page
-            container.innerHTML = ''; 
+            if (data.message) {
+                alert(data.message);
+                loadLists(); // Reload the dropdown to reflect the changes
+            } else {
+                alert('Failed to delete list.');
+            }
+        })
+        .catch(err => {
+            console.error('Error deleting list:', err);
+        });
+}
+function deleteList(listId) {
+    fetch(`/api/lists/${listId}`, {
+        method: 'DELETE',
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+                loadLists(); // Reload the dropdown to reflect the changes
+            } else {
+                alert('Failed to delete list.');
+            }
+        })
+        .catch(err => {
+            console.error('Error deleting list:', err);
+        });
+}
+function deleteList(listId) {
+    fetch(`/api/lists/${listId}`, {
+        method: 'DELETE',
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+                loadLists(); // Reload the dropdown to reflect the changes
+            } else {
+                alert('Failed to delete list.');
+            }
+        })
+        .catch(err => {
+            console.error('Error deleting list:', err);
+        });
+}
+
+
+    // Function to handle loading games for a specific list
+    function loadGamesForList(listId, listName) {
+        console.log(`Loading games for list: ${listName} (ID: ${listId})`);
+        currentListId = listId;
+        // You can extend this to dynamically load the games for the list
+        fetch(`/api/games/${listId}`)
+        .then(res => res.json())
+        .then(games => {
+            console.log(`Games in list ${listName}:`, games);
             
-            // Loop through each game
-            data.forEach(game => {
+            // Assuming you have a container element where you want to render the games
+            const container = document.getElementById("content");
+            
+            // Clear the container for each new list
+            container.innerHTML = '';
+            
+            // Loop through each game and render it
+            games.forEach(game => {
                 const gameContainer = document.createElement('div');
                 gameContainer.className = 'gameContainer';
+                
                 const img = document.createElement('img');
                 img.src = game.image;
                 const h2 = document.createElement('h2');
                 h2.textContent = game.name;
-
+                
                 img.addEventListener('click', () => {
                     popUpImage.src = game.image;
                     popUp.classList.remove('close');
@@ -126,47 +140,198 @@ function getListOfGames(container) {
                     popUpTitle.textContent = game.name;
                     popUpDescription.textContent = game.description;
                     popUpGenres.textContent = game.genres.map(genre => genre.name).join(', ');
-                    stats.style.filter = 'blur(5px)'
+                    stats.style.filter = 'blur(5px)';
                     showStars(game.rating, 'popUpStarRating');
-                    container.style.filter = 'blur(5px)'                   
+                    container.style.filter = 'blur(5px)';
+                    deleteGamebutton.dataset.gameId = game.id;
+
                 });
 
                 gameContainer.appendChild(img);
                 gameContainer.appendChild(h2);
+                container.appendChild(gameContainer);
+               
 
-                // Conditionally append to specific containers
-                if (container.id === 'myGames' && game.list.includes(1)) {
-                    container.appendChild(gameContainer); // For myGames
-                }  
-                if (container.id === 'topGames' && game.list.includes(4)) {
-                    container.appendChild(gameContainer); // For topGames
-                } 
-                if (container.id === 'completedGames' && game.list.includes(6)) {
-                    container.appendChild(gameContainer); // For completedGames
-                }
-                if (container.id === 'gamesToPlay' && game.list.includes(2)) {
-                    container.appendChild(gameContainer); // For completedGames
-                }
-                if (container.id === 'gamesPlaying' && game.list.includes(3)) {
-                    container.appendChild(gameContainer); // For completedGames
-                }
-                if (container.id === 'wishlist' && game.list.includes(5)) {
-                    container.appendChild(gameContainer); // For completedGames
-                }
-                
-                
             });
         })
-        .catch(err => {
-            console.log("Error fetching games:", err);
-        });
+        .catch(err => console.error("Error loading games:", err));
+      
 }
+closePopUp.addEventListener('click',    () => {
+    content.style.filter = 'blur(0px)'
+    popUp.classList.remove('open')
+    popUp.classList.add('close')
+    stats.style.filter = 'blur(0px)'
+});
+
+loadLists();
+
+const deleteGamebutton = document.getElementById('deleteGameBtn')
+
+
+deleteGamebutton.addEventListener('click',async  () => {
+    const gameId = deleteGamebutton.dataset.gameId;
+    if (!gameId) {
+        alert("Please select a game to delete.");
+        return;
+    }
+    try {
+        if(currentListId === 1){
+            const response = await fetch(`/api/games/${gameId}`, {
+                method: 'DELETE',
+            });
+            if (response.ok) {
+                alert('Game deleted successfully.');
+                location.reload();
+            } else {
+                alert('Failed to delete game.');
+            }
+        }else{
+            const response = await fetch(`/api/lists/${currentListId}/remove-game`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: popUpTitle.textContent }),
+            });
+            if (response.ok) {
+                alert('Game removed from list successfully.');
+                location.reload();
+            } else {
+                alert('Failed to remove game from list.');
+        }
+    
+    } 
+    }catch (error) {
+    }
+})
+
+const contentDiv = document.getElementById("content");
+
+  // Function to load page content
+  function loadPage(page) {
+    // Fetch the corresponding HTML page
+    fetch(`${page}.html`)
+      .then(response => {
+        if (!response.ok) throw new Error("Page not found");
+        return response.text();
+      })
+      .then(data => {
+        contentDiv.innerHTML = data; // Insert the page content into the content div
+      })
+      .catch(err => {
+        contentDiv.innerHTML = `<p>Error loading page: ${err.message}</p>`;
+      });
+  }
+
+  // Event listener for navigation links
+  document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault(); // Prevent default anchor behavior
+      const page = event.target.getAttribute("data-page");
+      loadPage(page); // Load the clicked page
+    });
+  });
+
+  // Load the default page (home) when the site loads
+  loadPage("home");
+
+
+  
+  
+
+  window.gfg = function(n, containerId) {  //had to do window. for it to work otherwise got some reference error 
+      const container = document.getElementById(containerId);
+      const stars = document.getElementsByClassName("star")
+      nOfStars = n
+      remove(containerId);
+      for (let i = 0; i < n; i++) {
+          if (n == 1) cls = "one";
+          else if (n == 2) cls = "two";
+          else if (n == 3) cls = "three";
+          else if (n == 4) cls = "four";
+          else if (n == 5) cls = "five";
+          stars[i].className = "star " + cls;
+      }
+      
+  }
+
+  function remove(containerId) {
+      const container = document.getElementById(containerId);
+      const stars = container.getElementsByClassName("star");
+      let i = 0;
+      while (i < 5) {
+          stars[i].className = "star";
+          i++;
+      }
+  }
 
 
 
 
-function showStars(rating, containerId){
+
+window.starsInPop = function (n, containerId) {
     const container = document.getElementById(containerId);
+    if (!container) {
+        console.error(`Container with ID "${containerId}" not found.`);
+        return;
+    }
+
+    const stars = container.getElementsByClassName("starPop");
+
+    // Reset the class for all stars
+    for (let i = 0; i < stars.length; i++) {
+        stars[i].className = "starPop"; // Reset class to default
+    }
+
+    // Add a 'selected' class for the number of stars clicked
+    for (let i = 0; i < n; i++) {
+        stars[i].className = "starPop selected"; // Highlight stars up to the given rating
+    }
+
+    // Update the star rating
+    changeStarRating(popUpTitle.textContent, n);
+};
+
+window.changeStarRating = function (gameName, n) {
+    fetch('/api/games')
+        .then((res) => res.json())
+        .then((data) => {
+            // Find the game from the fetched data
+            const game = data.find((game) => game.name === gameName);
+
+            if (!game) {
+                console.error(`Game "${gameName}" not found.`);
+                return;
+            }
+
+            // Send the updated rating back to the server for persistence
+            fetch(`/api/games/${game.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ rating: n }), // Send only the rating
+            })
+                .then((response) => response.json())
+                .then((updatedGame) => {
+                    console.log('Updated game rating on server:', updatedGame);
+
+                    // Update stars in the pop-up dynamically
+                    showStars(updatedGame.rating, 'popUpStarRating');
+                })
+                .catch((error) => {
+                    console.error('Error updating game rating:', error);
+                });
+        })
+        .catch((error) => {
+            console.error('Error fetching games:', error);
+        });
+};
+
+window.showStars = function (rating, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) {
+        console.error(`Container with ID "${containerId}" not found.`);
+        return;
+    }
+    console.log("container found updating ")
     const stars = container.getElementsByClassName("starPop");
 
     // Reset all stars
@@ -178,51 +343,7 @@ function showStars(rating, containerId){
     for (let i = 0; i < rating; i++) {
         stars[i].className = "starPop selected";
     }
-}
-
-function starsInPop(n, containerId) {
-    const container = document.getElementById(containerId);
-    const stars = container.getElementsByClassName("starPop");
-   
-    // Reset the class for all stars
-    for (let i = 0; i < stars.length; i++) {
-        stars[i].className = "starPop"; // Reset class to default
-    }
-
-    // Add a 'selected' class for the number of stars clicked
-    for (let i = 0; i < n; i++) {
-        stars[i].className = "starPop selected"; // Highlight stars up to the given rating
-    }
-    changeStarRating(popUpTitle.textContent, n)
-}
-
-function changeStarRating(gameName, n){
-    fetch('/api/games')
-        .then(res => res.json())
-        .then(data => {
-            // Find the game from the fetched data
-            const game = data.find(game => game.name === gameName);
-
-            // If the game is found, update its rating
-            if (game) {
-                game.rating = n;
-                console.log(`Updated rating for ${game.name}: ${n} stars`);
-
-                // Optionally, send the updated rating back to the server (for persistence)
-                fetch(`/api/games/${game.id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ rating: n })
-                })
-                .then(response => response.json())
-                .then(updatedGame => console.log('Updated game rating on server:', updatedGame))
-                .catch(error => console.error('Error updating game rating:', error));
-            } else {
-                console.error('Game not found');
-            }
-        });
-
-}
+};
 
 //adding functionality to add the games 
 const addGameButton = document.getElementById('addGame'); // The button to open Add Game popup
@@ -230,83 +351,78 @@ const addGamePopUp = document.getElementById('addGamePopUp');
 const addGameClose = document.getElementById('addGameClose');
 
 addGameButton.addEventListener('click', () => {
-    if(currentPage==='myGames'){
-        myGames.style.filter = 'blur(5px)'
-    }
-    if(currentPage==='topGames'){
-        topGames.style.filter = 'blur(5px)'
-    }
-    if(currentPage==='wishlist'){
-        wishlist.style.filter = 'blur(5px)'
-    }
-    if(currentPage==='gamesPlaying'){
-        gamesPlaying.style.filter = 'blur(5px)'
-    }
-    if(currentPage==='gamesToPlay'){
-        gamesToPlay.style.filter = 'blur(5px)'
-    }
-    if(currentPage==='index'){
-        document.getElementById('index').style.filter = 'blur(5px)'
-    }
-    if(currentPage==='completedGames'){
-       completedGames.style.filter = 'blur(5px)'
-    }
+    content.style.filter = 'blur(5px)'
     stats.style.filter = 'blur(5px)'
     addGamePopUp.classList.remove('close');
     addGamePopUp.classList.add('open');
 });
 addGameClose.addEventListener('click', () => {
-    if(currentPage==='myGames'){
-        myGames.style.filter = 'blur(0px)'
-    }
-    if(currentPage==='topGames'){
-        topGames.style.filter = 'blur(0px)'
-    }
-    if(currentPage==='wishlist'){
-        wishlist.style.filter = 'blur(0px)'
-    }
-    if(currentPage==='gamesPlaying'){
-        gamesPlaying.style.filter = 'blur(0px)'
-    }
-    if(currentPage==='gamesToPlay'){
-        gamesToPlay.style.filter = 'blur(0px)'
-    }if(currentPage==='index'){
-      document.getElementById('index').style.filter = 'blur(0px)'
-    } if(currentPage==='completedGames'){
-        completedGames.style.filter = 'blur(0px)'
-     }
+    content.style.filter = 'blur(0px)'
     stats.style.filter = 'blur(0px)'
     addGamePopUp.classList.remove('open');
     addGamePopUp.classList.add('close');
 });
 
-let stars = 
-    document.getElementsByClassName("star")
-let nOfStars = 0
-    function gfg(n, containerId) {
-        const container = document.getElementById(containerId);
-        nOfStars = n
-        remove();
-        for (let i = 0; i < n; i++) {
-            if (n == 1) cls = "one";
-            else if (n == 2) cls = "two";
-            else if (n == 3) cls = "three";
-            else if (n == 4) cls = "four";
-            else if (n == 5) cls = "five";
-            stars[i].className = "star " + cls;
-        }
-        
-    }
+const addListButton = document.getElementById('addList'); // The button to open Add Game popup
+const addListPopUp = document.getElementById('addListPopUp');
+const addListClose = document.getElementById('addListClose');
+const addListForm = document.getElementById('addListForm'); 
+addListButton.addEventListener('click', () => {
+    content.style.filter = 'blur(5px)'
+    stats.style.filter = 'blur(5px)'
+    addListPopUp.classList.remove('close');
+    addListPopUp.classList.add('open');
+});
+addListClose.addEventListener('click', () => {
+    content.style.filter = 'blur(0px)'
+    stats.style.filter = 'blur(0px)'
+    addListPopUp.classList.remove('open');
+    addListPopUp.classList.add('close');
+});
 
-    function remove(containerId) {
-        const container = document.getElementById(containerId);
-        let i = 0;
-        while (i < 5) {
-            stars[i].className = "star";
-            i++;
-        }
+addListForm.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
+  
+    const listName = document.getElementById('listName').value.trim(); // Get the list name
+    if (!listName) {
+      alert('List name cannot be empty.');
+      return;
     }
-
+  
+    // Send POST request to add the new list
+    fetch('/api/lists', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: listName }), // Send the new list name
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to add list');
+        }
+        return response.json();
+      })
+      .then((newList) => {
+        console.log('New list added:', newList);
+  
+        // Optionally update the UI with the new list
+        const listDropdown = document.getElementById('listDropdown'); // Example dropdown
+        if (listDropdown) {
+          const newOption = document.createElement('option');
+          newOption.value = newList.id;
+          newOption.textContent = newList.name;
+          listDropdown.appendChild(newOption);
+        }
+  
+        // Reset form and close the pop-up
+        document.getElementById('listName').value = '';
+        addListPopUp.classList.remove('open');
+        addListPopUp.classList.add('close');
+        content.style.filter = 'blur(0px)';
+        stats.style.filter = 'blur(0px)';
+      })
+      .catch((error) => console.error('Error adding list:', error));
+  });
+  
 
 
 
@@ -337,30 +453,14 @@ formMyGames.addEventListener('submit', async (event) => {
 
         // Display search result
         const game = data.results[0]; // Take the first result as an example
-        const gamePlayingCheckBox = document.getElementById('gamePlaying');
-        const gameToPlayCheckBox = document.getElementById('gameToPlay');
-        const gameWishlistCheckBox = document.getElementById('gameWishlist');
-        const favouriteCheckBox = document.getElementById('favoriteGame');
-        const completedGamesCheckBox = document.getElementById('completedGame')
+        const listCheckboxesDiv = document.getElementById('listCheckboxes');
         const listsToBeIn =[]
-        listsToBeIn.push(1) // IF THE GAME IS IN TO PLAY OR PLAYING ITS IN MY GAMES BUT IF ITS ON WISHLIST ITS NOT CUZ I HAVENT BOUGHT IT YET
-        if(gameToPlayCheckBox.checked){
-            listsToBeIn.push(2)
-        }
-        else if(gamePlayingCheckBox.checked){
-            listsToBeIn.push(3)
-        }
-        if(gameWishlistCheckBox.checked){
-            listsToBeIn.pop()
-            listsToBeIn.push(5)
-        }
-        if(favouriteCheckBox.checked){
-            listsToBeIn.push(4)
-        }
-        if(completedGamesCheckBox.checked){
-            listsToBeIn.push(6)
-        }
-        
+        const checkboxes = listCheckboxesDiv.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                listsToBeIn.push(parseInt(checkbox.value));
+            }
+        });
 
         const newGame = {
             id: game.id, 
@@ -396,64 +496,23 @@ formMyGames.addEventListener('submit', async (event) => {
 });
 
 
-
-
-
-
-
-
-
-closePopUp.addEventListener('click',    () => {
-    if(currentPage==='myGames'){
-        myGames.style.filter = 'blur(0px)'
-    }
-    if(currentPage==='topGames'){
-        topGames.style.filter = 'blur(0px)'
-    }
-    if(currentPage==='gamesToPlay'){
-        gamesToPlay.style.filter = 'blur(0px)'
-    }
-    if(currentPage==='gamesPlaying'){
-        gamesPlaying.style.filter = 'blur(0px)'
-    }
-    if(currentPage==='wishlist'){
-        wishlist.style.filter = 'blur(0px)'
-    }
-    if(currentPage==='completedGames'){
-        completedGames.style.filter = 'blur(0px)'
-    }
-    popUp.classList.remove('open')
-    popUp.classList.add('close')
-  stats.style.filter = 'blur(0px)'
-});
-
-
 //Go through the games and go forward specific to the list
 forward.addEventListener('click', () => {
-    const gameName = popUpTitle.textContent
-    fetch('/api/games')
+    const gameName = popUpTitle.textContent; // Get the name of the current game
+    fetch('/api/games') // Fetch all games from the server
         .then(res => res.json())
         .then(data => {
-            // Filter games based on the current page
-            const specificList = data.filter(game => {
-                if (currentPage === 'myGames') return game.list.includes(1);
-                if (currentPage === 'topGames') return game.list.includes(4);
-                if (currentPage === 'gamesToPlay') return game.list.includes(2);
-                if (currentPage === 'gamesPlaying') return game.list.includes(3);
-                if (currentPage === 'wishlist') return game.list.includes(5);
-                if (currentPage === 'completedGames') return game.list.includes(6);
-            });
+            // Find the current game in the fetched data
+            const currentIndex = data.findIndex(game => game.name === gameName);
+            
+            // Get the next game, loop back to the first game if at the end
+            const nextGame = data[(currentIndex + 1) % data.length];
 
-            // Find the current game and get the next game
-            const currentIndex = specificList.findIndex(game => game.name === gameName);
-    
-            const nextGame = specificList[(currentIndex + 1) % specificList.length]; ;
-
-            // Update the popup with the next game's details
+            // Update the pop-up with the next game's details
             popUpTitle.textContent = nextGame.name;
             popUpDescription.textContent = nextGame.description;
             popUpImage.src = nextGame.image;
-            popUpGenres.textContent = nextGame.genres.map(genre => genre.name).join(', ')
+            popUpGenres.textContent = nextGame.genres.map(genre => genre.name).join(', ');
             showStars(nextGame.rating, 'popUpStarRating');
         })
         .catch(error => console.error('Error fetching games:', error));
@@ -462,34 +521,25 @@ forward.addEventListener('click', () => {
     
     
     backward.addEventListener('click', () => {
-        const gameName = popUpTitle.textContent
-        fetch('/api/games')
+        const gameName = popUpTitle.textContent; // Get the name of the current game
+    fetch('/api/games') // Fetch all games from the server
         .then(res => res.json())
         .then(data => {
-            // Filter games based on the current page
-            const specificList = data.filter(game => {
-                if (currentPage === 'myGames') return game.list.includes(1);
-                if (currentPage === 'topGames') return game.list.includes(4);
-                if (currentPage === 'gamesToPlay') return game.list.includes(2);
-                if (currentPage === 'gamesPlaying') return game.list.includes(3);
-                if (currentPage === 'wishlist') return game.list.includes(5);
-                if (currentPage === 'completedGames') return game.list.includes(6);
-            });
+            // Find the current game in the fetched data
+            const currentIndex = data.findIndex(game => game.name === gameName);
+            
+            // Get the next game, loop back to the first game if at the end
+            const nextGame = data[(currentIndex - 1+ data.length) % data.length];
 
-            // Find the current game and get the next game
-            const currentIndex = specificList.findIndex(game => game.name === gameName);
-    
-            const nextGame = specificList[(currentIndex - 1) % specificList.length]; ;
-
-            // Update the popup with the next game's details
+            // Update the pop-up with the next game's details
             popUpTitle.textContent = nextGame.name;
             popUpDescription.textContent = nextGame.description;
             popUpImage.src = nextGame.image;
-            popUpGenres.textContent = nextGame.genres.map(genre => genre.name).join(', ')
+            popUpGenres.textContent = nextGame.genres.map(genre => genre.name).join(', ');
             showStars(nextGame.rating, 'popUpStarRating');
         })
         .catch(error => console.error('Error fetching games:', error));
-        }
+    }
     )
 
 gamesTotal = document.getElementById('totalGames')
@@ -524,8 +574,86 @@ function getGameStats(){
 })
 }
 
+// Event listener for the Save Description button
+document.getElementById('saveDescriptionBtn').addEventListener('click', () => {
+    const gameName = popUpTitle.textContent; // Get the name of the current game
+    const newDescription = document.getElementById('popUpDescriptionEdit').value; // Get the new description from the textarea
+    
+    if (!newDescription) {
+        alert('Description cannot be empty.');
+        return;
+    }
+    
+    fetch('/api/games') // Fetch all games from the server
+        .then(res => res.json())
+        .then(data => {
+            // Find the current game in the list
+            const game = data.find(game => game.name === gameName);
+            
+            if (!game) {
+                console.error('Game not found.');
+                return;
+            }
+            
+            // Update the game's description
+            game.description = newDescription;
+
+            // Send the updated game to the server
+            fetch(`/api/games/${game.id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ description: newDescription }) // Only send the description
+            })
+            .then(response => response.json())
+            .then(updatedGame => {
+                console.log('Game updated:', updatedGame);
+
+                // Update the UI with the new description
+                popUpDescription.textContent = updatedGame.description;
+
+                // Optionally, you could clear the text area or close the pop-up
+                document.getElementById('popUpDescriptionEdit').value = '';
+                popUp.classList.add('close');
+                stats.style.filter  = 'blur(0px)';
+                contentDiv.style.filter = 'blur(0px)';
+            })
+            .catch(error => console.error('Error updating game:', error));
+        })
+        .catch(error => console.error('Error fetching games:', error));
+});
+
+function loadCheckBoxes() {
+    // Fetch lists from the server
+    fetch('/api/lists')
+        .then(res => res.json())
+        .then(lists => {
+            const listCheckboxesDiv = document.getElementById('listCheckboxes');
+            listCheckboxesDiv.innerHTML = ''; // Clear any existing checkboxes
+
+            // Loop through the lists and create a checkbox for each one
+            lists.forEach(list => {
+                const label = document.createElement('label');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'list'; // You can adjust the name as needed
+                checkbox.value = list.id; // Use list.id as the value for the checkbox
+                checkbox.id = `list-${list.id}`; // Set the id for the checkbox
+                
+                label.setAttribute('for', checkbox.id);
+                label.textContent = list.name; // Set the label text to the list's name
+
+                // Append the checkbox and label to the container
+                listCheckboxesDiv.appendChild(checkbox);
+                listCheckboxesDiv.appendChild(label);
+                listCheckboxesDiv.appendChild(document.createElement('br')); // For line break between checkboxes
+            });
+        })
+        .catch(error => console.error('Error fetching lists:', error));
+}
+
+// Call the function to load the lists when the page loads
+window.onload = loadCheckBoxes;
 
 
-
-getListOfGames()
 getGameStats()
+})
