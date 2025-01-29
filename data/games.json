@@ -1,60 +1,55 @@
-[
-  {
-    "id": 51325,
-    "name": "The Last of Us Part II",
-    "genres": [
-      {
-        "id": 2,
-        "name": "Shooter",
-        "slug": "shooter"
-      },
-      {
-        "id": 3,
-        "name": "Adventure",
-        "slug": "adventure"
-      },
-      {
-        "id": 4,
-        "name": "Action",
-        "slug": "action"
-      }
-    ],
-    "image": "https://media.rawg.io/media/games/909/909974d1c7863c2027241e265fe7011f.jpg",
-    "description": "I do not get the hate this was an absolute masterclass In story telling and character writing. ",
-    "list": [
-      1,
-      4,
-      6
-    ],
+[ 
+
+  { 
+
+    "id": 51325, 
+
+    "name": "The Last of Us Part II", 
+
+    "genres": [ 
+
+      { "id": 2, "name": "Shooter", "slug": "shooter" }, 
+
+      { "id": 3, "name": "Adventure", "slug": "adventure" }, 
+
+      { "id": 4, "name": "Action", "slug": "action" } 
+
+    ], 
+
+    "image": "https://media.rawg.io/media/games/909/909974d1c7863c2027241e265fe7011f.jpg", 
+
+    "description": "I do not get the hate this was an absolute masterclass In story telling and character writing.", 
+
+    "list": [1, 4, 6], 
+
     "rating": 5
-  },
-  {
-    "id": 799265,
-    "name": "The Last of Us Part I",
-    "genres": [
-      {
-        "id": 2,
-        "name": "Shooter",
-        "slug": "shooter"
-      },
-      {
-        "id": 3,
-        "name": "Adventure",
-        "slug": "adventure"
-      },
-      {
-        "id": 4,
-        "name": "Action",
-        "slug": "action"
-      }
-    ],
-    "image": "https://media.rawg.io/media/games/71d/71df9e759b2246f9769126c98ac997fc.jpg",
-    "description": "The best game of all time, joel and ellie have the best relationship in any sort of game ever.",
-    "list": [
-      1,
-      4,
-      6
-    ],
-    "rating": 5
+
+  }, 
+
+  { 
+
+    "id": 799265, 
+
+    "name": "The Last of Us Part I", 
+
+    "genres": [ 
+
+      { "id": 2, "name": "Shooter", "slug": "shooter" }, 
+
+      { "id": 3, "name": "Adventure", "slug": "adventure" }, 
+
+      { "id": 4, "name": "Action", "slug": "action" } 
+
+    ], 
+
+    "image": "https://media.rawg.io/media/games/71d/71df9e759b2246f9769126c98ac997fc.jpg", 
+
+    "description": "The best game of all time, joel and ellie have the best relationship in any sort of game ever.", 
+
+    "list": [1, 4, 6], 
+
+    "rating": 5 
+
   }
-]
+
+] 

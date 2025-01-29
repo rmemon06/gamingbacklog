@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentListId = 1;
     // Function to fetch lists and populate the dropdown
     function loadLists() {
-        fetch('/api/lists') // Fetch lists from the backend
+        fetch('/api/lists') // Fetch lists from the backend THIS IS USING THE API ROUTE FOR LISTS AND GETTING THEM ALLL 
             .then(res => res.json())
             .then(data => {
                 dropdownContainer.innerHTML = ""; // Clear existing links
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const link = document.createElement("a");
                     link.href = "#"; // Prevent default navigation for now
                     link.textContent = list.name; // Set the list name as the link text
-                    link.dataset.listId = list.id; // Store the list ID for later use
+                    link.dataset.listId = list.id; // Store the list ID to use it later
                     
                     // Add event listener for dynamic page loading
                     link.addEventListener("click", (e) => {
@@ -35,14 +35,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         loadGamesForList(list.id, list.name); // Custom function to handle list content
                     });
                     const deleteIcon = document.createElement("img");
-                    deleteIcon.src = "images/close.png"; // Path to your close.png
+                    deleteIcon.src = "images/close.png"; //this is to add the ability to use the delete end point for links
                     
     
     
                     deleteIcon.addEventListener("click", (e) => {
-                        e.stopPropagation(); // Prevent event bubbling to the link
+                        e.stopPropagation(); // Prevent event bubbling tolink
                         if (confirm(`Are you sure you want to delete the list "${list.name}"?`)) {
-                            deleteList(list.id); // Call the function to delete the list
+                            deleteList(list.id); // Call the function to delete the list from the file
                         }
                     });
     
@@ -55,14 +55,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Error loading lists:", err);
             });
     }function deleteList(listId) {
-    fetch(`/api/lists/${listId}`, {
+    fetch(`/api/lists/${listId}`, { // using the delete end point for the list to be deleted
         method: 'DELETE',
     })
         .then(res => res.json())
         .then(data => {
             if (data.message) {
                 alert(data.message);
-                loadLists(); // Reload the dropdown to reflect the changes
+                loadLists(); // Reload the dropdown once its been deleted 
             } else {
                 alert('Failed to delete list.');
             }
@@ -71,59 +71,20 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error('Error deleting list:', err);
         });
 }
-function deleteList(listId) {
-    fetch(`/api/lists/${listId}`, {
-        method: 'DELETE',
-    })
-        .then(res => res.json())
-        .then(data => {
-            if (data.message) {
-                alert(data.message);
-                loadLists(); // Reload the dropdown to reflect the changes
-            } else {
-                alert('Failed to delete list.');
-            }
-        })
-        .catch(err => {
-            console.error('Error deleting list:', err);
-        });
-}
-function deleteList(listId) {
-    fetch(`/api/lists/${listId}`, {
-        method: 'DELETE',
-    })
-        .then(res => res.json())
-        .then(data => {
-            if (data.message) {
-                alert(data.message);
-                loadLists(); // Reload the dropdown to reflect the changes
-            } else {
-                alert('Failed to delete list.');
-            }
-        })
-        .catch(err => {
-            console.error('Error deleting list:', err);
-        });
-}
-
 
     // Function to handle loading games for a specific list
     function loadGamesForList(listId, listName) {
-        console.log(`Loading games for list: ${listName} (ID: ${listId})`);
+        console.log(`Loading games for list: ${listName} (ID: ${listId})`); // debugging statements like usual
         currentListId = listId;
-        // You can extend this to dynamically load the games for the list
-        fetch(`/api/games/${listId}`)
+        
+        fetch(`/api/games/${listId}`) // fetching games from the games route, getting all from a specific list 
         .then(res => res.json())
         .then(games => {
-            console.log(`Games in list ${listName}:`, games);
-            
-            // Assuming you have a container element where you want to render the games
+            console.log(`Games in list ${listName}:`, games); //logging the games from the lsit
             const container = document.getElementById("content");
-            
-            // Clear the container for each new list
             container.innerHTML = '';
             
-            // Loop through each game and render it
+            // Loop through each game and render it into my content div dynamically 
             games.forEach(game => {
                 const gameContainer = document.createElement('div');
                 gameContainer.className = 'gameContainer';
@@ -132,7 +93,7 @@ function deleteList(listId) {
                 img.src = game.image;
                 const h2 = document.createElement('h2');
                 h2.textContent = game.name;
-                
+                //adding the functioanlity to load up the popUp when you press the image
                 img.addEventListener('click', () => {
                     popUpImage.src = game.image;
                     popUp.classList.remove('close');
@@ -157,6 +118,7 @@ function deleteList(listId) {
         .catch(err => console.error("Error loading games:", err));
       
 }
+
 closePopUp.addEventListener('click',    () => {
     content.style.filter = 'blur(0px)'
     popUp.classList.remove('open')
@@ -168,7 +130,7 @@ loadLists();
 
 const deleteGamebutton = document.getElementById('deleteGameBtn')
 
-
+//functionality to delete game
 deleteGamebutton.addEventListener('click',async  () => {
     const gameId = deleteGamebutton.dataset.gameId;
     if (!gameId) {
@@ -177,7 +139,7 @@ deleteGamebutton.addEventListener('click',async  () => {
     }
     try {
         if(currentListId === 1){
-            const response = await fetch(`/api/games/${gameId}`, {
+            const response = await fetch(`/api/games/${gameId}`, { //using the endpoint to get a game by its id and then deleting it 
                 method: 'DELETE',
             });
             if (response.ok) {
@@ -187,7 +149,7 @@ deleteGamebutton.addEventListener('click',async  () => {
                 alert('Failed to delete game.');
             }
         }else{
-            const response = await fetch(`/api/lists/${currentListId}/remove-game`, {
+            const response = await fetch(`/api/lists/${currentListId}/remove-game`, { //using the endpoint to get games from a specific list and then deleting it
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: popUpTitle.textContent }),
@@ -206,6 +168,8 @@ deleteGamebutton.addEventListener('click',async  () => {
 
 const contentDiv = document.getElementById("content");
 
+
+//making it dynamic and single page application
   // Function to load page content
   function loadPage(page) {
     // Fetch the corresponding HTML page
@@ -239,6 +203,7 @@ const contentDiv = document.getElementById("content");
   
 
   window.gfg = function(n, containerId) {  //had to do window. for it to work otherwise got some reference error 
+    //this is my function to show the stars in the addGame pop up so the initial rating 
       const container = document.getElementById(containerId);
       const stars = document.getElementsByClassName("star")
       nOfStars = n
@@ -253,7 +218,7 @@ const contentDiv = document.getElementById("content");
       }
       
   }
-
+//removing the star rating
   function remove(containerId) {
       const container = document.getElementById(containerId);
       const stars = container.getElementsByClassName("star");
@@ -290,9 +255,9 @@ window.starsInPop = function (n, containerId) {
     // Update the star rating
     changeStarRating(popUpTitle.textContent, n);
 };
-
+//function to change the star rating 
 window.changeStarRating = function (gameName, n) {
-    fetch('/api/games')
+    fetch('/api/games') //getting the games from the games endpoint so we can see its rating 
         .then((res) => res.json())
         .then((data) => {
             // Find the game from the fetched data
@@ -303,7 +268,7 @@ window.changeStarRating = function (gameName, n) {
                 return;
             }
 
-            // Send the updated rating back to the server for persistence
+            // Send the updated rating back to the server using a put request of a specific game
             fetch(`/api/games/${game.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -345,8 +310,8 @@ window.showStars = function (rating, containerId) {
     }
 };
 
-//adding functionality to add the games 
-const addGameButton = document.getElementById('addGame'); // The button to open Add Game popup
+//adding functionality to the pop ups SIMPLEEE STUFFF
+const addGameButton = document.getElementById('addGame'); //
 const addGamePopUp = document.getElementById('addGamePopUp');
 const addGameClose = document.getElementById('addGameClose');
 
@@ -380,6 +345,7 @@ addListClose.addEventListener('click', () => {
     addListPopUp.classList.add('close');
 });
 
+//ADDING A LIST TO THE LISTS JSON 
 addListForm.addEventListener('submit', (event) => {
     event.preventDefault(); // Prevent default form submission behavior
   
@@ -404,8 +370,8 @@ addListForm.addEventListener('submit', (event) => {
       .then((newList) => {
         console.log('New list added:', newList);
   
-        // Optionally update the UI with the new list
-        const listDropdown = document.getElementById('listDropdown'); // Example dropdown
+        //  update the UI with the new list
+        const listDropdown = document.getElementById('listDropdown');
         if (listDropdown) {
           const newOption = document.createElement('option');
           newOption.value = newList.id;
@@ -425,7 +391,7 @@ addListForm.addEventListener('submit', (event) => {
   
 
 
-
+//using rawg api to get the games and add them to the library
 const apiKey=  '3d05d3f9fbca425298598d2ba04a4e08';
 const formMyGames = document.getElementById('addGameMyGames');
 const myGamesSummary =  document.getElementById('userSummary')
@@ -435,10 +401,10 @@ formMyGames.addEventListener('submit', async (event) => {
 
     const gameName = document.getElementById('gameName').value;
     try {
-        const response = await fetch(`https://api.rawg.io/api/games?search=${encodeURIComponent(gameName)}&key=${apiKey}`);
+        const response = await fetch(`https://api.rawg.io/api/games?search=${encodeURIComponent(gameName)}&key=${apiKey}`); //getting response from the rawg api
         const data = await response.json();
         const gamesResponse = await fetch('/api/games');
-        const existingGames = await gamesResponse.json();
+        const existingGames = await gamesResponse.json(); // getitng current games by fetching all games from the server
         //check if its already in the library so cant add duplicates, checking :))))
         const dupe = existingGames.some(game => game.name.toLowerCase() === gameName.toLowerCase()); 
 
@@ -451,9 +417,8 @@ formMyGames.addEventListener('submit', async (event) => {
             return;
         }
 
-        // Display search result
         const game = data.results[0]; // Take the first result as an example
-        const listCheckboxesDiv = document.getElementById('listCheckboxes');
+        const listCheckboxesDiv = document.getElementById('listCheckboxes'); // need to get what lists to put the game into by which ones are checked
         const listsToBeIn =[]
         const checkboxes = listCheckboxesDiv.querySelectorAll('input[type="checkbox"]');
         checkboxes.forEach(checkbox => {
@@ -474,7 +439,7 @@ formMyGames.addEventListener('submit', async (event) => {
         };
         console.log(newGame )
        
-        const addingGameResponse = await fetch('/api/games', {
+        const addingGameResponse = await fetch('/api/games', { //post request to add the game to the library
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -542,6 +507,7 @@ forward.addEventListener('click', () => {
     }
     )
 
+    //stats data 
 gamesTotal = document.getElementById('totalGames')
 gamesCompleted = document.getElementById('gamesCompleted')
 gamesCurrent = document.getElementById('gamesInProgress')
@@ -551,7 +517,7 @@ let gc = 0
 let gp = 0
 let gw = 0
 function getGameStats(){
-    fetch('/api/games')
+    fetch('/api/games') //getting all games to iterate through and find how many in each lsit 
         .then(res => res.json())
         .then(data => {
             data.forEach(game => {
@@ -611,7 +577,7 @@ document.getElementById('saveDescriptionBtn').addEventListener('click', () => {
                 // Update the UI with the new description
                 popUpDescription.textContent = updatedGame.description;
 
-                // Optionally, you could clear the text area or close the pop-up
+                //close the pop up and reset the blur
                 document.getElementById('popUpDescriptionEdit').value = '';
                 popUp.classList.add('close');
                 stats.style.filter  = 'blur(0px)';
@@ -635,12 +601,12 @@ function loadCheckBoxes() {
                 const label = document.createElement('label');
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
-                checkbox.name = 'list'; // You can adjust the name as needed
-                checkbox.value = list.id; // Use list.id as the value for the checkbox
-                checkbox.id = `list-${list.id}`; // Set the id for the checkbox
+                checkbox.name = 'list';
+                checkbox.value = list.id; 
+                checkbox.id = `list-${list.id}`; //
                 
                 label.setAttribute('for', checkbox.id);
-                label.textContent = list.name; // Set the label text to the list's name
+                label.textContent = list.name; 
 
                 // Append the checkbox and label to the container
                 listCheckboxesDiv.appendChild(checkbox);

@@ -271,8 +271,8 @@ nav a:hover {
     transform: translate(-50%, -50%);
     opacity: 0;
     width: 600px;
-    height: auto; /* Let the height adjust dynamically */
-    z-index: -10;
+    height: auto; /* Let the height adjust dynamically depending on the sizing n stuff*/
+    z-index: -10; /* Hide the popp */
     border-radius: 10px;
     color: white;
     display: flex;
@@ -285,7 +285,7 @@ nav a:hover {
     visibility: visible;
     opacity: 1;
     transition: opacity 0.3s linear;
-    z-index: 999;
+    z-index: 999; /*gotta move it forward in the z index*/
 }
 
 #addGameClose, #addListClose {
@@ -349,7 +349,7 @@ nav a:hover {
     font-family: inherit;
     border-radius: 5px;
 }
-
+/*getting them all line by line checkbox and label sidde by side*/
 #listCheckboxes {
     display: inline;
     
@@ -405,7 +405,24 @@ nav a:hover {
     text-shadow: 1px 1.5px 1px #656565;
   }
 
+  #quickStats p{
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+}
 
+#quickStats {
+    background-color: black;
+  margin-bottom: 20px;
+}
+#description{
+    font-size: 15px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
   
 
@@ -463,28 +480,8 @@ footer a:hover {
 
 
 
-/*------------------------------------------------------------------------------------------------------------*/
-/*quick stats*/
-/*------------------------------------------------------------------------------------------------------------*/
 
-#quickStats p{
-    font-size: 20px;
-    color: white;
-    text-align: center;
-    margin-top: 10px;
-}
 
-#quickStats {
-    background-color: black;
-  margin-bottom: 20px;
-}
-#description{
-    font-size: 15px;
-    color: white;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
 
 /*------------------------------------------------------------------------------------------------------------*/
 /*star ratings*/
@@ -518,6 +515,8 @@ footer a:hover {
     color: #f31212; /* Highlighted star color */
    
 }
+
+/*some responsiveness*/
 @media (max-width: 480px) {
     /* Game containers */
     .gameContainer {
@@ -563,6 +562,7 @@ footer a:hover {
         width: 60px;
     }
 }
+
 /*FOR OTHER SIZES*/
 @media (max-width: 768px) {
     /* Game containers */
